@@ -34,5 +34,17 @@ Global
 		SolutionGuid = {064958BE-42C5-4268-8132-49EF6D009D99}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D794BCF-8D4E-4F4F-9AA5-0E535FED3648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D794BCF-8D4E-4F4F-9AA5-0E535FED3648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D794BCF-8D4E-4F4F-9AA5-0E535FED3648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D794BCF-8D4E-4F4F-9AA5-0E535FED3648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9DBBCF7-3C0F-42DF-B399-A70BE3388A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9DBBCF7-3C0F-42DF-B399-A70BE3388A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9DBBCF7-3C0F-42DF-B399-A70BE3388A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9DBBCF7-3C0F-42DF-B399-A70BE3388A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 EndGlobal
