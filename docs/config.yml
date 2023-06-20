@@ -1,0 +1,10 @@
+remote_theme: pages-themes/hacker@v0.2.0
+plugins:
+  - jekyll-remote-theme 
+
+title: Stravaig template
+description: The template docs
+show_downloads: false
+
+nuget:
+  url: https://www.nuget.org/packages/<package-name>
