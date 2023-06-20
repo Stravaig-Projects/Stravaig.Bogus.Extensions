@@ -22,11 +22,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__Documentation", "__Docume
 		..\release-notes\wip-release-notes.md = ..\release-notes\wip-release-notes.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Bogus.Extensions", "Stravaig.Bogus.Extensions\Stravaig.Bogus.Extensions.csproj", "{3D794BCF-8D4E-4F4F-9AA5-0E535FED3648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Bogus.Extensions.Tests", "Stravaig.Bogus.Extensions.Tests\Stravaig.Bogus.Extensions.Tests.csproj", "{E9DBBCF7-3C0F-42DF-B399-A70BE3388A9D}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {064958BE-42C5-4268-8132-49EF6D009D99}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 	EndGlobalSection
 EndGlobal

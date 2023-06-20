@@ -1,4 +1,4 @@
-name: Stravaig PROJECT NAME HERE
+name: Stravaig Bogus Extensions
 on: 
   push:
     branches: 
@@ -38,9 +38,9 @@ jobs:
     name: Build, Test, and Release
     runs-on: ubuntu-latest
     env:
-      STRAVAIG_SOLUTION: src/XXXX.sln
-      STRAVAIG_TESTS: XXXX.Tests
-      STRAVAIG_PROJECT: XXXX
+      STRAVAIG_SOLUTION: src/Stravaig.Bogus.Extensions.sln
+      STRAVAIG_TESTS: Stravaig.Bogus.Extensions.Tests
+      STRAVAIG_PROJECT: Stravaig.Bogus.Extensions
     
     steps:
       - name: Check out code
