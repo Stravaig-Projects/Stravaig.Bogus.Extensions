@@ -138,5 +138,5 @@ public static class UkStreet
         "York",
     };
 
-    private static readonly int NamesMaxIndex = Names.Length;
+    private static readonly int NamesMaxIndex = Names.Length - 1;
 }

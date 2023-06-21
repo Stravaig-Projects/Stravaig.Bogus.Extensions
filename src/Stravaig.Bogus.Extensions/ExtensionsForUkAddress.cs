@@ -14,8 +14,14 @@ public static class ExtensionsForUkAddress
    
     private static string GenerateInboundCode(this Address address) =>
         $"{address.Random.Number(0, 9)}{address.GenerateUnitLetter()}{address.GenerateUnitLetter()}";
+
+    public static string UkPostcode(this Address address)
+    {
+        var data = OutwardPostalCodes.GetRandom(address);
+        return data.Code + " " + address.GenerateInboundCode();
+    }
     
-   public static UkAddress UK(this Address address)
+   public static UkAddress UkAddress(this Address address)
    { 
        var data = OutwardPostalCodes.GetRandom(address);
        string locality = data.GetRandomLocality(address);
@@ -28,7 +34,7 @@ public static class ExtensionsForUkAddress
            StreetAddress = GenerateStreetAddress(address),
            Locality = locality,
            PostTown = data.PostTown,
-           PostCode = data.Code + " " + address.GenerateInboundCode(),
+           Postcode = data.Code + " " + address.GenerateInboundCode(),
            County = data.PostalCounty,
        };
    }
@@ -41,11 +47,42 @@ public static class ExtensionsForUkAddress
        return address.GenerateStreetName(sb);
    }
    
-   private static string? GenerateSubBuilding(Address address)
-   {
-       if (address.Random.Bool(LikelihoodOfASubBuilding) == false)
-           return null;
+    private static string? GenerateSubBuilding(Address address)
+    {
+        if (address.Random.Bool(LikelihoodOfASubBuilding) == false)
+            return null;
 
-       return $"Flat {address.Random.Number(1, 10)}";
-   }
+        switch (address.Random.Number(1, 5))
+        {
+            case 1:
+                return $"Flat {address.Random.Number(1, 10)}";
+            case 2:
+            {
+                var floorNumber = address.Random.Number(-1, 6);
+                string floor = floorNumber < 0
+                    ? "B"
+                    : floorNumber == 0
+                        ? "G"
+                        : floorNumber.ToString();
+                return $"Flat {floor}/{address.Random.Number(1, 4)}";
+            }
+            case 3:
+            {
+                char block = (char)('A' + address.Random.Number(0, 5));
+                int floor = address.Random.Number(1, 12);
+                int flat = address.Random.Number(1, 3);
+                return $"Block {block}, Flat {floor}/{flat}";
+            }
+            case 4:
+            {
+                int floor = address.Random.Number(1, 30);
+                char flat = (char)('A' + address.Random.Number(0, 5));
+                return $"Flat {floor}{flat}";
+            }
+            case 5:
+                return $"Flat {(char)('A' + address.Random.Number(0, 10))}";
+        }
+
+        return null;
+    }
 }
