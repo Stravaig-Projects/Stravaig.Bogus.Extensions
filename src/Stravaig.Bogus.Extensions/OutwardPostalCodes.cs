@@ -126,6 +126,76 @@ internal class OutwardPostalCodes
         },
         new()
         {
+            Code="BA1",
+            PostTown = "Bath",
+            PostalCounty = "Avon",
+            Localities = new[]{ null, "Batheaston", "Bathford" },
+        },
+        new()
+        {
+            Code="BA2",
+            PostTown = "Bath",
+            PostalCounty = "Avon",
+            Localities = new[]{ null, "Farmborough", "Timsbury", "Peasedown St John", "Wellow", "Hinton Charterhouse", "Norton St Philip", "Freshford", "Limpley Stoke" },
+        },
+        new()
+        {
+            Code="BB1",
+            PostTown = "Blackburn",
+            PostalCounty = "Lancashire",
+            Localities = new[]{ null, "Bank Hey", "Belthorn", "Blackamoor", "Clayton-le-Dale", "Guide", "Knuzden", "Mellor", "Ramsgreave", "Rishton", "Salesbury", "Shadsworth", "Sunnybower", "Tottleworth", "Whitebirk", "Wilpshire"},
+        },
+        new()
+        {
+            Code="BD24",
+            PostTown = "Settle",
+            PostalCounty = "North Yorkshire",
+            Localities = new[]{null, "Giggleswick", "Horton in Ribblesdale"},
+        },
+        new()
+        {
+            Code="BH12",
+            PostTown = "Poole",
+            PostalCounty = "Dorset",
+            Localities = new[]{null, "Branksome", "Alderney", "Upper Parkstone", "Newtown", "Bournemouth University" },
+        },
+        new()
+        {
+            Code="BL7",
+            PostTown = "Bolton",
+            PostalCounty = "Lancashire",
+            Localities = new[]{null, "Belmont", "Bromley Cross", "Chapeltown", "Edgworth", "Egerton", "Turton"},
+        },
+        new()
+        {
+            Code="BN22",
+            PostTown = "Eastbourne",
+            PostalCounty = "East Sussex",
+            Localities = new[]{ null, "Old Town"},
+        },
+        new()
+        {
+            Code="BR6",
+            PostTown = "Orpington",
+            PostalCounty = "Kent",
+            Localities = new[]{null, "Locksbottom", "Farnborough", "Crofton", "Chelsfield", "Downe", "Pratt's Bottom", "Well Hill" },
+        },
+        new()
+        {
+            Code="BS27",
+            PostTown = "Cheddar",
+            PostalCounty = "Somerset",
+            Localities = new[]{null, "Draycott"},
+        },
+        new()
+        {
+            Code="BT38",
+            PostTown = "Carrickfergus",
+            PostalCounty = "County Antrim",
+            Localities = new[]{null, "Ballycarry", "Greenisland", "Kilroot", "Whitehead"}
+        },
+        new()
+        {
             Code="CA12",
             PostTown = "Keswick",
             PostalCounty = "Cumbria",
