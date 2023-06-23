@@ -42,12 +42,6 @@ public class ValidateOutwardPostalDataTests
                 Console.WriteLine($"{i}: No code. {item}");
             }
 
-            if (string.IsNullOrWhiteSpace(item.PostalCounty))
-            {
-                issueCount++;
-                Console.WriteLine($"{i}: No PostalCounty. {item}");
-            }
-
             if (string.IsNullOrWhiteSpace(item.PostTown))
             {
                 issueCount++;

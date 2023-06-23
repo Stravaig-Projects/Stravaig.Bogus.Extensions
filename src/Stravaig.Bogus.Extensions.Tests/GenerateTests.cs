@@ -18,7 +18,7 @@ public class GenerateTests
         for (int i = 0; i < 100; i++)
         {
             var address = faker.Address.UkAddress();
-            Console.WriteLine(address.ToJson());
+            Console.WriteLine(address);
         }
     }
     

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text;
 using Bogus.DataSets;
@@ -8,7 +9,7 @@ internal class OutwardPostalCodes
 {
     internal required string Code { get; init; }
     internal required string PostTown { get; init; }
-    internal required string PostalCounty { get; init; }
+    internal string? PostalCounty { get; init; }
     internal required string?[] Localities { get; init; }
 
     public override string ToString()
@@ -87,7 +88,9 @@ internal class OutwardPostalCodes
     }
 
     internal string? GetRandomLocality(Address address) =>
-        Localities[address.Random.Number(0, Localities.Length - 1)];
+        Localities.Length > 0
+            ? Localities[address.Random.Number(0, Localities.Length - 1)]
+            : null;
 
     internal static OutwardPostalCodes GetRandom(Address address) =>
         Data[address.Random.Number(0, MaxIndex)];
@@ -200,6 +203,34 @@ internal class OutwardPostalCodes
             PostTown = "Keswick",
             PostalCounty = "Cumbria",
             Localities = new[] {null, "Seatoller", "Braithwaite", "Bassenthwaite", "Threlkeld"},
+        },
+        new()
+        {
+            Code="CB8",
+            PostTown = "Newmarket",
+            PostalCounty = "Suffolk",
+            Localities = new[]{null, "Ashley", "Brinkley", "Burrough End", "Burrough Green", "Carlton", "Cheveley", "Clopton Green", "Cowlinge", "Dalham", "Denston", "Ditton Green", "Dullingham", "Dunstall Green", "Exning", "Gazeley", "Great Bradley", "Kennett", "Kentford", "Kirtling", "Kirtling Green", "Lady's Green", "Landwade", "Lidgate", "Moulton", "Ousden", "Six Mile Bottom", "Snailwell", "Stetchworth", "Stradishall", "Thorns", "Upend", "Westley Waterless", "Wickhambrook", "Woodditton"},
+        },
+        new()
+        {
+            Code="CF24",
+            PostTown = "Cardiff",
+            PostalCounty = "South Glamorgan",
+            Localities = new[]{null, "Cathays", "Roath", "Plasnewydd", "Splott", "Adamsdown"},
+        },
+        new()
+        {
+            Code="CH4",
+            PostTown = "Chester",
+            PostalCounty = "Cheshire",
+            Localities = new[]{null, "Chester", "Curzon Park", "Handbridge", "Lache", "Pulford", "Penyffordd", "Broughton", "Saltney"},
+        },
+        new()
+        {
+            Code="CM2",
+            PostTown = "Chelmsford",
+            PostalCounty = "Essex",
+            Localities = Array.Empty<string>(),
         },
         new()
         {
@@ -359,7 +390,6 @@ internal class OutwardPostalCodes
         {
             Code="W5",
             PostTown = "London",
-            PostalCounty = "London",
             Localities = new[]{"Ealing", "South Ealing", "Ealing Common", "North Ealing", "Northfields", "Pitshanger", "Hanger Lane"},
         },
         new()
