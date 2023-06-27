@@ -4,8 +4,14 @@ using System.Collections.Generic;
 
 namespace Stravaig.Bogus.Extensions;
 
+
 public class ArrayOfArrays<T>: IReadOnlyList<T>
 {
+    private static class EmptyArrayOfArrays<TItem>
+    {
+        internal static readonly ArrayOfArrays<TItem> Value = new();
+    }
+
     [Serializable]
     public struct ArrayOfArraysEnumerator : IEnumerator<T>
     {
@@ -17,6 +23,7 @@ public class ArrayOfArrays<T>: IReadOnlyList<T>
 
         internal ArrayOfArraysEnumerator(ArrayOfArrays<T> arrayOfArrays)
         {
+            var a = Array.Empty<T>();
             _arrayOfArrays = arrayOfArrays;
             Reset();
         }
@@ -68,6 +75,10 @@ public class ArrayOfArrays<T>: IReadOnlyList<T>
 
     }
     
+    internal static ArrayOfArrays<T> Empty()
+    {
+        return EmptyArrayOfArrays<T>.Value;
+    }
     
     private T[][] _data;
     private int _totalLength;
@@ -127,4 +138,10 @@ public class ArrayOfArrays<T>: IReadOnlyList<T>
 
     /// <inheritdoc />
     public int Count { get => _totalLength; }
+    
+    public int MaxIndex { get => _totalLength - 1; }
+    
+    public bool IsEmpty { get => _totalLength == 0; }
+    
+    public bool HasContent { get => _totalLength > 0; }
 }

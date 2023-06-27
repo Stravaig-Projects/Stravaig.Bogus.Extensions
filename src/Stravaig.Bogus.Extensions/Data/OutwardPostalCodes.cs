@@ -1,22 +1,26 @@
 using System;
-using System.Linq;
 using System.Text;
-using Bogus.DataSets;
 
-namespace Stravaig.Bogus.Extensions;
+namespace Stravaig.Bogus.Extensions.Data;
 
-internal class OutwardPostalCodes
+internal class LocationInformation
 {
     internal required string Code { get; init; }
     internal required string PostTown { get; init; }
     internal string? PostalCounty { get; init; }
     internal required string?[] Localities { get; init; }
 
+    internal ArrayOfArrays<string> StreetPrefixLists { get; init; } = ArrayOfArrays<string>.Empty();
+
+    internal ArrayOfArrays<string> StreetNameLists { get; init; } = ArrayOfArrays<string>.Empty();
+    
+    internal ArrayOfArrays<string> StreetSuffixLists { get; init; }
+
     public override string ToString()
     {
         // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         StringBuilder sb = new StringBuilder();
-        sb.Append(nameof(OutwardPostalCodes));
+        sb.Append(nameof(LocationInformation));
         sb.Append('(');
         sb.Append(nameof(Code));
         sb.Append(':');
@@ -53,51 +57,23 @@ internal class OutwardPostalCodes
             sb.Append(PostalCounty);
             sb.Append('"');
         }
-
-        sb.Append(", ");
-        sb.Append(nameof(Localities));
-        sb.Append(':');
-        if (Localities == null)
-            sb.Append("null");
-        else
-        {
-            sb.Append('[');
-            bool isFirst = true;
-            foreach (var locality in Localities.OrderBy(l => l))
-            {
-                if (isFirst)
-                    isFirst = false;
-                else
-                    sb.Append(", ");
-
-                if (locality == null)
-                    sb.Append("null");
-                else
-                {
-                    sb.Append('"');
-                    sb.Append(locality);
-                    sb.Append('"');
-                }
-            }
-            sb.Append(']');
-        }
         
         sb.Append(')');
         return sb.ToString();
         // ReSharper restore ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
     }
 
-    internal string? GetRandomLocality(Address address) =>
-        Localities.Length > 0
-            ? Localities[address.Random.Number(0, Localities.Length - 1)]
-            : null;
-
-    internal static OutwardPostalCodes GetRandom(Address address) =>
-        Data[address.Random.Number(0, MaxIndex)];
+    // internal string? GetRandomLocality(Address address) =>
+    //     Localities.Length > 0
+    //         ? Localities[address.Random.Number(0, Localities.Length - 1)]
+    //         : null;
+    //
+    // internal static OutwardPostalCodes GetRandom(Address address) =>
+    //     Data[address.Random.Number(0, MaxIndex)];
 
     // From: 
     // https://en.wikipedia.org/wiki/List_of_postcode_districts_in_the_United_Kingdom
-    private static readonly OutwardPostalCodes[] Data = new OutwardPostalCodes[]
+    private static readonly LocationInformation[] Data = new LocationInformation[]
     {
         new()
         {
@@ -105,6 +81,9 @@ internal class OutwardPostalCodes
             PostTown = "Aberdeen",
             PostalCounty = "Aberdeenshire",
             Localities = new[] {"Bridge of Dee", "Mannofield", "Ruthrieston"},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -112,6 +91,9 @@ internal class OutwardPostalCodes
             PostTown = "Aberdeen",
             PostalCounty = "Aberdeenshire",
             Localities = new[] {"Ferryhill", "Torry"},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -238,6 +220,9 @@ internal class OutwardPostalCodes
             PostTown = "Forfar",
             PostalCounty = "Angus",
             Localities = new [] { null, "Glamis", "Letham" },
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -245,6 +230,9 @@ internal class OutwardPostalCodes
             PostTown = "Kirriemuir",
             PostalCounty = "Angus",
             Localities = new string?[] { null },
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -252,6 +240,9 @@ internal class OutwardPostalCodes
             PostTown = "Edinburgh",
             PostalCounty = "Midlothian",
             Localities = new[]{ "Old Town", null },
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -259,6 +250,9 @@ internal class OutwardPostalCodes
             PostTown = "Bathgate",
             PostalCounty = "West Lothian",
             Localities = new [] { "Armadale", null },
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -266,6 +260,9 @@ internal class OutwardPostalCodes
             PostTown = "Falkirk",
             PostalCounty = "Stirlingshire",
             Localities = new[]{null, "Avonbridge", "California", "Camelon", "Limerigg", "Shieldhill", "Slamannan", "Standburn"},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -273,6 +270,9 @@ internal class OutwardPostalCodes
             PostTown = "Glasgow",
             PostalCounty = "Lanarkshire",
             Localities = new[]{"Merchant City", null},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -280,6 +280,9 @@ internal class OutwardPostalCodes
             PostTown = "Glasgow",
             PostalCounty = "Lanarkshire",
             Localities = new[]{"Cardonald", "Hillington","Penilee", "Mosspark"},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -301,6 +304,9 @@ internal class OutwardPostalCodes
             PostTown = "Dornoch",
             PostalCounty = "Sutherland",
             Localities = new string?[]{null},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -308,13 +314,19 @@ internal class OutwardPostalCodes
             PostTown = "Rogart",
             PostalCounty = "Sutherland",
             Localities = new string?[]{null},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
             Code="KA7",
             PostTown = "Ayr",
             PostalCounty = "Ayrshire",
-            Localities = new[]{null, "Holmston", "Forehill", "Belmont", "Castlehill", "Kincaidson", "Alloway", "Doonfoot", "Masonhill", "Dunure"}
+            Localities = new[]{null, "Holmston", "Forehill", "Belmont", "Castlehill", "Kincaidson", "Alloway", "Doonfoot", "Masonhill", "Dunure"},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
@@ -357,6 +369,9 @@ internal class OutwardPostalCodes
             PostTown = "Lochwinnoch",
             PostalCounty = "Renfrewshire",
             Localities = new[]{ null, "Newton of Belltrees"},
+            StreetPrefixLists = StreetPrefixes.Bundles.Common,
+            StreetNameLists = StreetNames.Bundles.Scotland,
+            StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
         },
         new()
         {
