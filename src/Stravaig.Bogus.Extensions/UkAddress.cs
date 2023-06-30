@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Stravaig.Extensions.Core;
 
 namespace Stravaig.Bogus.Extensions;
@@ -39,56 +38,61 @@ public class UkAddress
     /// The Post Code.
     /// </summary>
     public required string Postcode { get; init; }
+    
+    /// <summary>
+    /// The constituent country.
+    /// </summary>
+    public required string Country { get; init; }
 
     /// <summary>
     /// The address in sequences parts as an array.
     /// </summary>
     /// <returns>An array of sequenced parts of the address.</returns>
-    public string[] AsPartsArray() => Parts.ToArray();
+    public string[] AsPartsArray(Part parts = Part.All) => Parts(parts).ToArray();
 
     /// <summary>
     /// The address in sequenced parts.
     /// </summary>
-    public IEnumerable<string> Parts
+    public IEnumerable<string> Parts(Part parts = Part.All)
     {
-        get
-        {
-            if (SubBuilding.HasContent())
-                yield return SubBuilding!;
+        if (parts.Includes(Part.SubBuilding) && SubBuilding.HasContent())
+            yield return SubBuilding!;
+
+        if (parts.Includes(Part.StreetAddress))
             yield return StreetAddress;
-            if (Locality.HasContent())
-                yield return Locality!;
+        
+        if (parts.Includes(Part.Locality) && Locality.HasContent())
+            yield return Locality!;
+        
+        if (parts.Includes(Part.PostTown))
             yield return PostTown;
-            if (County.HasContent())
-                yield return County!;
+        
+        if (parts.Includes(Part.County) && County.HasContent())
+            yield return County!;
+        
+        if (parts.Includes(Part.Postcode))
             yield return Postcode;
-        }
+        
+        if (parts.Includes(Part.Country))
+            yield return Country;
     }
 
     /// <summary>
-    /// A string that represents the current address.
+    /// A string that represents the address containing just the requested parts.
+    /// </summary>
+    /// <param name="parts">The parts of the address to appear in the string.</param>
+    /// <returns>The address.</returns>
+    public string ToString(Part parts)
+    {
+        return string.Join(", ", Parts(parts));
+    }
+    
+    /// <summary>
+    /// A string that represents the full address.
     /// </summary>
     /// <returns>The address.</returns>
     public override string ToString()
     {
-        const string separator = ", ";
-        StringBuilder sb = new StringBuilder(
-            SubBuilding?.Length ?? 0 +
-            StreetAddress.Length +
-            Locality?.Length ?? 0 +
-            PostTown.Length +
-            County?.Length ?? 0 +
-            Postcode.Length + 10);
-
-        if (SubBuilding.HasContent())
-            sb.Append(SubBuilding).Append(separator);
-        sb.Append(StreetAddress).Append(separator);
-        if (Locality.HasContent())
-            sb.Append(Locality).Append(separator);
-        sb.Append(PostTown).Append(separator);
-        if (County.HasContent())
-            sb.Append(County).Append(separator);
-        sb.Append(Postcode);
-        return sb.ToString();
+        return ToString(Part.All);
     }
 }
