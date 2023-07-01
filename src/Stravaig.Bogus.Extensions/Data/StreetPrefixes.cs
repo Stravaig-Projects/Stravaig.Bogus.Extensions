@@ -5,12 +5,16 @@ internal static class StreetPrefixes
     internal static readonly string[] Common = new[]
     {
         "East",
+        "Eastern",
         "High",
         "Lower",
         "North",
+        "Northern",
         "South",
+        "Southern",
         "Upper",
         "West",
+        "Western",
     };
 
     internal static class Bundles
