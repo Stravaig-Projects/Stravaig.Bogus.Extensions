@@ -30,6 +30,6 @@ public static class UkStreet
             SuffixIndex = address.Random.Number(0, generalLocation.StreetSuffixLists.MaxIndex),
         };
         
-        builder.GenerateStreetName(sb); 
+        builder.Generate(sb); 
     }
 }

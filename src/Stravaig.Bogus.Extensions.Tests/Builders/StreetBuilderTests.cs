@@ -61,7 +61,7 @@ public class StreetBuilderTests
             NameIndex = nameIndex,
             Suffixes = Suffixes,
             SuffixIndex = suffixIndex,
-        }.GenerateStreetName();
+        }.Generate();
     }
 
     [Test]
@@ -77,7 +77,7 @@ public class StreetBuilderTests
             Suffixes = Suffixes,
             SuffixIndex = -1,  
         };
-        Should.Throw<ArgumentNullException>(() => builder.GenerateStreetName(null!))
+        Should.Throw<ArgumentNullException>(() => builder.Generate(null!))
             .ParamName.ShouldBe("sb");
     }
     
@@ -126,7 +126,7 @@ public class StreetBuilderTests
                 _ => null!,
             },
         };
-        return Should.Throw<BuilderStatePropertyException>(() => builder.GenerateStreetName())
+        return Should.Throw<BuilderStatePropertyException>(() => builder.Generate())
             .Message;
     }
 }

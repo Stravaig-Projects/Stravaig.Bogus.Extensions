@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Immutable;
 using System.Text;
+using Bogus;
+using Stravaig.Bogus.Extensions.Data;
 
 namespace Stravaig.Bogus.Extensions.Builders;
 
-internal class StreetBuilder
+internal class StreetBuilder : IBuilder
 {
+    private const float LikelihoodOfPrefix = 0.02f;
+    
     internal required ArrayOfArrays<string> Prefixes { get; init; }
     internal required bool UsePrefix { get; init; }
     internal required int PrefixIndex { get; init; }
@@ -16,8 +20,21 @@ internal class StreetBuilder
     internal required ArrayOfArrays<string> Suffixes { get; init; }
     internal required int SuffixIndex { get; init; }
 
+    internal static StreetBuilder Create(LocationInformation location, Randomizer random)
+    {
+        return new StreetBuilder
+        {
+            Prefixes = location.StreetPrefixLists,
+            UsePrefix = random.Bool(LikelihoodOfPrefix),
+            PrefixIndex = random.Number(0, location.StreetPrefixLists.MaxIndex),
+            Names = location.StreetNameLists,
+            NameIndex = random.Number(0, location.StreetNameLists.MaxIndex),
+            Suffixes = location.StreetSuffixLists,
+            SuffixIndex = random.Number(0, location.StreetSuffixLists.MaxIndex),
+        };
+    }
     
-    public void GenerateStreetName(StringBuilder sb)
+    public void Generate(StringBuilder sb)
     {
         if (sb == null) throw new ArgumentNullException(nameof(sb));
         ThrowIfBadState();
@@ -41,10 +58,10 @@ internal class StreetBuilder
         sb.Append(suffix);
     }
 
-    public string GenerateStreetName()
+    public string Generate()
     {
         StringBuilder sb = new StringBuilder();
-        GenerateStreetName(sb);
+        Generate(sb);
         return sb.ToString();
     }
 
