@@ -4,26 +4,26 @@ using Stravaig.Bogus.Extensions.Builders;
 namespace Stravaig.Bogus.Extensions.Tests.Builders;
 
 [TestFixture]
-public class SimpleNumericFlatBuilderTests
+public class SimpleAlphabetFlatBuilderTests
 {
     [Test]
-    [TestCase(1, ExpectedResult = "Flat 1")]
-    [TestCase(5, ExpectedResult = "Flat 5")]
-    [TestCase(10, ExpectedResult = "Flat 10")]
+    [TestCase(0, ExpectedResult = "Flat A")]
+    [TestCase(3, ExpectedResult = "Flat D")]
+    [TestCase(7, ExpectedResult = "Flat H")]
     public string HappyPathScenarios(int flatNumber)
     {
-        return new SimpleNumericFlatBuilder
+        return new SimpleAlphabetFlatBuilder
         {
             FlatNumber = flatNumber,
         }.Generate();
     }
 
     [Test]
-    [TestCase(0, ExpectedResult = "FlatNumber, 0, is out of range; It must be between 1 and 10.")]
-    [TestCase(11, ExpectedResult = "FlatNumber, 11, is out of range; It must be between 1 and 10.")]
+    [TestCase(-1, ExpectedResult = "FlatNumber, -1, is out of range; It must be between 0 and 7.")]
+    [TestCase(8, ExpectedResult = "FlatNumber, 8, is out of range; It must be between 0 and 7.")]
     public string ObjectStateIssueThrowsException(int flatNumber)
     {
-        var builder = new SimpleNumericFlatBuilder()
+        var builder = new SimpleAlphabetFlatBuilder
         {
             FlatNumber = flatNumber,
         };

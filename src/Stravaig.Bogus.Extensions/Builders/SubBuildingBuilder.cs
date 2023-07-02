@@ -1,5 +1,3 @@
-using System;
-using System.Text;
 using Bogus;
 
 namespace Stravaig.Bogus.Extensions.Builders;
@@ -17,13 +15,23 @@ internal abstract class SubBuildingBuilder
 
         return style switch
         {
-            1 => new SimpleFlatBuilder
+            1 => new SimpleNumericFlatBuilder
             {
                 FlatNumber = random.Number(1, 10),
             },
-            2 => new FlatWithFloorBuilder()
+            2 => new SimpleAlphabetFlatBuilder
+            {
+                FlatNumber = random.Number(0, 7),
+            },
+            3 => new FlatWithFloorBuilder
             {
                 FloorNumber = random.Number(-1, 6),
+                FlatNumber = random.Number(1,4),
+            },
+            4 => new FlatWithBlockAndFloorBuilder
+            {
+                BlockNumber = random.Number(0,5),
+                FloorNumber = random.Number(1,12),
                 FlatNumber = random.Number(1,4),
             },
             _ => NullSubBuildingBuilder.Instance

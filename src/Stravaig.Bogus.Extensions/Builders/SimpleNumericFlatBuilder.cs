@@ -1,6 +1,6 @@
 namespace Stravaig.Bogus.Extensions.Builders;
 
-internal class SimpleFlatBuilder : SubBuildingBuilder
+internal class SimpleNumericFlatBuilder : SubBuildingBuilder
 {
     internal required int FlatNumber { get; init; }
     internal override string Generate()
@@ -14,5 +14,4 @@ internal class SimpleFlatBuilder : SubBuildingBuilder
         if (FlatNumber is < 1 or > 10)
             throw BuilderStatePropertyOutOfRangeException.PropertyIsOutOfRange(nameof(FlatNumber), 1, 10, FlatNumber);
     }
-    
 }
