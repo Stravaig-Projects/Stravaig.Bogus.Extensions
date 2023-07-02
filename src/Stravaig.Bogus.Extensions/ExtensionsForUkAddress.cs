@@ -24,13 +24,13 @@ public static class ExtensionsForUkAddress
         return builder.Generate();
     }
     
-   // public static UkAddress UkAddress(this Address address)
-   // { 
-   //     var data = OutwardPostalCodes.GetRandom(address);
-   //     string locality = data.GetRandomLocality(address);
-   //     string? subBuilding = GenerateSubBuilding(address);
-   //     
-   //     
+   //  public static UkAddress UkAddress(this Address address)
+   //  { 
+   //      var data = LocationInformation.GetRandom(address.Random);
+   // //     string locality = data.GetRandomLocality(address);
+   // //     string? subBuilding = GenerateSubBuilding(address);
+   // //     
+   // //     
    //     return new()
    //     {
    //         SubBuilding = subBuilding,
