@@ -5,7 +5,7 @@ using Stravaig.Bogus.Extensions.Data;
 
 namespace Stravaig.Bogus.Extensions.Builders;
 
-internal class PostCodeBuilder : IBuilder
+internal class PostCodeBuilder
 {
     private static readonly char[] ValidUnitLetters = "ABDEFGHJLNPQRSTUWXYZ".ToCharArray();
     private static readonly int ValidUnitLettersMaxIndex = ValidUnitLetters.Length - 1;
@@ -20,7 +20,7 @@ internal class PostCodeBuilder : IBuilder
 
     internal static PostCodeBuilder Create(LocationInformation location, Randomizer random)
     {
-        return new PostCodeBuilder()
+        return new PostCodeBuilder
         {
             Location = location,
             Number = random.Number(1, 9),

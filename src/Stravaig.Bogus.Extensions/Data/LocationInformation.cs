@@ -1,5 +1,8 @@
 using System;
+using System.Security.AccessControl;
 using System.Text;
+using Bogus;
+
 // ReSharper disable StringLiteralTypo
 
 namespace Stravaig.Bogus.Extensions.Data;
@@ -74,6 +77,12 @@ internal class LocationInformation
     // internal static OutwardPostalCodes GetRandom(Address address) =>
     //     Data[address.Random.Number(0, MaxIndex)];
 
+    internal static LocationInformation GetRandom(Randomizer random)
+    {
+        int index = random.Number(0, MaxIndex);
+        return Data[index];
+    }
+    
     // From: 
     // https://en.wikipedia.org/wiki/List_of_postcode_districts_in_the_United_Kingdom
     private static readonly LocationInformation[] Data = new LocationInformation[]

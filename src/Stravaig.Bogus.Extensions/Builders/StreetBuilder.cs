@@ -6,7 +6,7 @@ using Stravaig.Bogus.Extensions.Data;
 
 namespace Stravaig.Bogus.Extensions.Builders;
 
-internal class StreetBuilder : IBuilder
+internal class StreetBuilder
 {
     private const float LikelihoodOfPrefix = 0.02f;
     
