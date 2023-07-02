@@ -21,6 +21,11 @@ internal abstract class SubBuildingBuilder
             {
                 FlatNumber = random.Number(1, 10),
             },
+            2 => new FlatWithFloorBuilder()
+            {
+                FloorNumber = random.Number(-1, 6),
+                FlatNumber = random.Number(1,4),
+            },
             _ => NullSubBuildingBuilder.Instance
         };
     }
