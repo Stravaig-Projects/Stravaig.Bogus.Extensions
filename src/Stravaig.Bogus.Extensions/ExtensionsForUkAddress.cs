@@ -23,69 +23,21 @@ public static class ExtensionsForUkAddress
         var builder = StreetBuilder.Create(location, random);
         return builder.Generate();
     }
-    
-   //  public static UkAddress UkAddress(this Address address)
-   //  { 
-   //      var data = LocationInformation.GetRandom(address.Random);
-   // //     string locality = data.GetRandomLocality(address);
-   // //     string? subBuilding = GenerateSubBuilding(address);
-   // //     
-   // //     
-   //     return new()
-   //     {
-   //         SubBuilding = subBuilding,
-   //         StreetAddress = GenerateStreetAddress(address),
-   //         Locality = locality,
-   //         PostTown = data.PostTown,
-   //         Postcode = data.Code + " " + address.GenerateInboundCode(),
-   //         County = data.PostalCounty,
-   //     };
-   // }
-   //
-   // private static string GenerateStreetAddress(Address address)
-   // {
-   //     StringBuilder sb = new StringBuilder();
-   //     sb.Append(address.Random.Number(1, 150).ToString());
-   //     sb.Append(" ");
-   //     return address.GenerateStreetName(sb);
-   // }
-   //
-   //  private static string? GenerateSubBuilding(Address address)
-   //  {
-   //      if (address.Random.Bool(LikelihoodOfASubBuilding) == false)
-   //          return null;
-   //
-   //      switch (address.Random.Number(1, 5))
-   //      {
-   //          case 1:
-   //              return $"Flat {address.Random.Number(1, 10)}";
-   //          case 2:
-   //          {
-   //              var floorNumber = address.Random.Number(-1, 6);
-   //              string floor = floorNumber < 0
-   //                  ? "B"
-   //                  : floorNumber == 0
-   //                      ? "G"
-   //                      : floorNumber.ToString();
-   //              return $"Flat {floor}/{address.Random.Number(1, 4)}";
-   //          }
-   //          case 3:
-   //          {
-   //              char block = (char)('A' + address.Random.Number(0, 5));
-   //              int floor = address.Random.Number(1, 12);
-   //              int flat = address.Random.Number(1, 3);
-   //              return $"Block {block}, Flat {floor}/{flat}";
-   //          }
-   //          case 4:
-   //          {
-   //              int floor = address.Random.Number(1, 30);
-   //              char flat = (char)('A' + address.Random.Number(0, 5));
-   //              return $"Flat {floor}{flat}";
-   //          }
-   //          case 5:
-   //              return $"Flat {(char)('A' + address.Random.Number(0, 10))}";
-   //      }
-   //
-   //      return null;
-   //  }
+
+    public static UkAddress UkAddress(this Address address)
+    {
+        var random = address.Random;
+        var data = LocationInformation.GetRandom(random);
+
+        return new()
+        {
+            SubBuilding = SubBuildingBuilder.Create(random).Generate(),
+            StreetAddress = StreetBuilder.Create(data, random).Generate(),
+            Locality = LocalityBuilder.Create(data, random).Generate(), // TODO: Locality Builder
+            PostTown = data.PostTown,
+            County = data.PostalCounty,
+            Country = data.Country,
+            Postcode = PostCodeBuilder.Create(data, random).Generate(),
+        };
+    }
 }

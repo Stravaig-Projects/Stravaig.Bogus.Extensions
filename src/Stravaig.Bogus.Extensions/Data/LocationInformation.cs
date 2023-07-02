@@ -69,14 +69,6 @@ internal class LocationInformation
         // ReSharper restore ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
     }
 
-    // internal string? GetRandomLocality(Address address) =>
-    //     Localities.Length > 0
-    //         ? Localities[address.Random.Number(0, Localities.Length - 1)]
-    //         : null;
-    //
-    // internal static OutwardPostalCodes GetRandom(Address address) =>
-    //     Data[address.Random.Number(0, MaxIndex)];
-
     internal static LocationInformation GetRandom(Randomizer random)
     {
         int index = random.Number(0, MaxIndex);
@@ -262,7 +254,7 @@ internal class LocationInformation
             PostTown = "Kirriemuir",
             PostalCounty = "Angus",
             Country = "Scotland",
-            Localities = new string?[] { null },
+            Localities = Array.Empty<string>(),
             StreetPrefixLists = StreetPrefixes.Bundles.Common,
             StreetNameLists = StreetNames.Bundles.Scotland,
             StreetSuffixLists = StreetSuffixes.Bundles.Scotland,
